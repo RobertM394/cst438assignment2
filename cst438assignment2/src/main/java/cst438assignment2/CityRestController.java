@@ -15,7 +15,8 @@ public class CityRestController {
 	@Autowired
 	private CityService cityService;
 	
-	@Autowired CityRepository cityRepository;
+	@Autowired 
+	CityRepository cityRepository;
 	
 	@GetMapping("/api/cities/{name}")
 	public ResponseEntity<City> cityInfo(@PathVariable("name") String name) {
@@ -31,10 +32,12 @@ public class CityRestController {
 		City city = cities.get(0);
 		
 	//Call service WeatherService to retrieve time and temp data for city name
-		TimeAndTemp timeAndTemp = WeatherService.getTimeAndTemp(name);
+		//TimeAndTemp timeAndTemp = new TimeAndTemp(0, 0, 0);
+	   TimeAndTemp timeAndTemp = WeatherService.getTimeAndTemp(name); // "Cannot make static reference to non-static method getTimeAndTemp()"
+	   
 
-		double tempFahrenheit = Math.round((timeAndTemp.getTemp() - 273.15) * 9.0/5.0 + 32.0);
-		timeAndTemp.setTemp(tempFahrenheit);
+		double tempFahrenheit = Math.round((timeAndTemp.temp - 273.15) * 9.0/5.0 + 32.0);
+		timeAndTemp.temp = tempFahrenheit;
 		
 		city.setTimeAndTemp(timeAndTemp);
 		
