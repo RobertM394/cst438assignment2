@@ -33,6 +33,9 @@ public class WeatherService {
 						JsonNode.class);
 		JsonNode json = response.getBody(); //2
 		log.info("Status code from weather server:" + response.getStatusCodeValue());
+		/*if (response.getStatusCodeValue() != "200") 
+			return new TimeAndTemp(0, 0, 0); */
+		
 		double temp = json.get("main").get("temp").asDouble();
 		long time = json.get("dt").asLong();
 		int timezone = json.get("timezone").asInt();

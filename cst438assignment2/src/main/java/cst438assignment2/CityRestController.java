@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class CityRestController {
 	
 	@Autowired
-	private CityService cityService;
-	
-	@Autowired
 	private WeatherService weatherService;
 	
 	@Autowired 
@@ -29,18 +26,19 @@ public class CityRestController {
 		if ( cities.size() == 0) {
 			
 			//return 404 not found HTTP status code
-			return new ResponseEntity<City>( HttpStatus.NOT_FOUND);
+			return new ResponseEntity<City>(HttpStatus.NOT_FOUND);
 		} else {
 		//get first city in result array
 		City city = cities.get(0);
 		
 	//Call service WeatherService to retrieve time and temp data for city name
-		//TimeAndTemp timeAndTemp = new TimeAndTemp(0, 0, 0);
-	   TimeAndTemp timeAndTemp = weatherService.getTimeAndTemp(name); // "Cannot make static reference to non-static method getTimeAndTemp()"
+	   TimeAndTemp timeAndTemp = weatherService.getTimeAndTemp(name); 
 	   
-
 		double tempFahrenheit = Math.round((timeAndTemp.temp - 273.15) * 9.0/5.0 + 32.0);
 		timeAndTemp.temp = tempFahrenheit;
+		
+		//add TimeAndTemp object to City object
+		city.timeAndTemp = timeAndTemp;
 		
 		//return status 200(OK) code and city information in JSON format
 		return new ResponseEntity<City>(city, HttpStatus.OK);

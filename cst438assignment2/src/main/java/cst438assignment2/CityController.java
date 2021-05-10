@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class CityController {
 	
-	@Autowired
-	CityRepository cityRepository;
-	
-	@Autowired
-	CountryRepository countryRepository;
-	
 	@Autowired 
 	CityService cityService;
 
@@ -26,7 +20,7 @@ public class CityController {
 		//create new City Object
 		CityInfo cityInfo = cityService.getCityInfo(cityName);
 		
-		//set correct time
+		//temperature conversion
 		double tempFahrenheit = Math.round((cityInfo.timeAndTemp.temp - 273.15) * 9.0/5.0 + 32.0);
 		cityInfo.timeAndTemp.temp = tempFahrenheit;
 
