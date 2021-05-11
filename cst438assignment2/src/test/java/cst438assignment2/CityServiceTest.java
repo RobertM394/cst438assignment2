@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -39,7 +40,8 @@ public class CityServiceTest {
 	private WeatherService weatherService;
 	
 	//this is the class being tested
-	CityService cityService = new CityService();
+	@Autowired
+	private CityService cityService;
 	
 	@BeforeEach
 	public void setUpEach() {
@@ -66,15 +68,15 @@ public class CityServiceTest {
 		given(weatherService.getTimeAndTemp("TestCity")).willReturn(new TimeAndTemp(273.15, 1000, -1000));
 		
 		//Expected TimeAndTemp object
-		TimeAndTemp expectedTimeAndTemp = new TimeAndTemp(273.15, 1000, -1000);
-		CityInfo expectedResult = new CityInfo(city, country, expectedTimeAndTemp);
+		TimeAndTemp timeAndTemp = new TimeAndTemp(273.15, 1000, -1000);
+		CityInfo expectedResult = new CityInfo(city, country, timeAndTemp);
 		
 		//Result from test
-		CityInfo result = cityService.getCityInfo("TestCity");
+		CityInfo cityInfo = cityService.getCityInfo("TestCity");
 		
 		//assert expected result = test result
 		//MUST implement .equals() method for CityInfo class
-		assertThat(expectedResult).isEqualTo(expectedResult);
+		assertThat(expectedResult).isEqualTo(cityInfo);
 	}
 	
 }

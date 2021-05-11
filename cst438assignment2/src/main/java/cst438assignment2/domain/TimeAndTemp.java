@@ -6,6 +6,8 @@ public class TimeAndTemp {
 	public long time;
 	public int timezone;
 	
+	public TimeAndTemp() { };
+	
 	public TimeAndTemp(double temp, long time, int timezone)
 	{
 		this.temp = temp;
