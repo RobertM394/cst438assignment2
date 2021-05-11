@@ -20,10 +20,8 @@ public class CityController {
 	public String getCityInfo(@PathVariable("city") String cityName, 
 			Model model) {
 		
-		//create new City Object
 		CityInfo cityInfo = cityService.getCityInfo(cityName);
 		
-		//temperature conversion
 		double tempFahrenheit = Math.round((cityInfo.timeAndTemp.temp - 273.15) * 9.0/5.0 + 32.0);
 		cityInfo.timeAndTemp.temp = tempFahrenheit;
 
