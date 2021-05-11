@@ -1,9 +1,16 @@
-package cst438assignment2;
+package cst438assignment2.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import cst438assignment2.CityRepository;
+import cst438assignment2.CountryRepository;
+import cst438assignment2.domain.City;
+import cst438assignment2.domain.CityInfo;
+import cst438assignment2.domain.Country;
+import cst438assignment2.domain.TimeAndTemp;
 
 @Service
 public class CityService {

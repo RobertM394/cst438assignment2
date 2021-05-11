@@ -1,4 +1,4 @@
-package cst438assignment2;
+package cst438assignment2.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,7 +20,7 @@ public class City {
 	//transient marks extra field in an entity class 
 	//that is not written to or read from the database
 	@Transient
-	TimeAndTemp timeAndTemp;
+	public TimeAndTemp timeAndTemp;
 	
 	@ManyToOne
 	@JoinColumn(name = "countrycode", referencedColumnName="code")

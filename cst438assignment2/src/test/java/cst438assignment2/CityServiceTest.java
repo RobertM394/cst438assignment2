@@ -10,6 +10,13 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import cst438assignment2.domain.City;
+import cst438assignment2.domain.CityInfo;
+import cst438assignment2.domain.Country;
+import cst438assignment2.domain.TimeAndTemp;
+import cst438assignment2.services.CityService;
+import cst438assignment2.services.WeatherService;
+
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

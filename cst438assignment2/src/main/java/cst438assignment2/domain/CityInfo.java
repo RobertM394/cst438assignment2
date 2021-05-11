@@ -1,4 +1,4 @@
-package cst438assignment2;
+package cst438assignment2.domain;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
