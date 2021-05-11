@@ -77,9 +77,6 @@ public class CityRestControllerTest {
 		
 		City cityResult = jsonCityAttempt.parseObject(response.getContentAsString());
 	
-   	String test = response.getContentAsString();
-   	System.out.println("RESPONSE" + response); //response does not appear to be a JSON object though code matches lecture video example.
-	
    	City expectedResult = new City(1, "TestCity", "TestDistrict", 1000, country);
    	//expected weather is temp in Fahrenheit 
    	expectedResult.setTimeAndTemp(new TimeAndTemp(32, 1000, -1000));
@@ -91,8 +88,8 @@ public class CityRestControllerTest {
 	@Test
 	public void testInvalidCityName() throws Exception {
 		
-		Country country = new Country("Nul", "Null");
-		City city = new City(1, "Null", "Null", 0, country);
+		Country country = new Country("AAA", "AAAA");
+		City city = new City(1, "InvalidCity", "InvalidDistrict", 0, country);
 		List<City> cities = new ArrayList<City>();
 		cities.add(city);
 		
@@ -104,13 +101,10 @@ public class CityRestControllerTest {
 		
 		City cityResult = jsonCityAttempt.parseObject(response.getContentAsString());
 	
-		String test = response.getContentAsString();
-		System.out.println("RESPONSE" + response); 
+		City expectedResult = new City(1, "InvalidCity", "InvalidDistrict", 1000, country);
+		expectedResult.setTimeAndTemp(new TimeAndTemp(0, 0, 0));
 	
-		City expectedResult = new City(1, "TestCity", "TestDistrict", 1000, country);
-		expectedResult.setTimeAndTemp(new TimeAndTemp(32, 1000, -1000));
-	
-		assertThat(expectedResult).isEqualTo(cityResult); 	
+		assertThat(expectedResult).isNotEqualTo(cityResult); //expected but unclear what values are returned from invalid city name. cannot construct objects with null values.
 	}	
 	
 	@Test
@@ -130,15 +124,11 @@ public class CityRestControllerTest {
 		//perform test using simulated HTTP GET request using URL: /city/TestCity
 		MockHttpServletResponse response = mvc.perform(get("/api/cities/MultiCity")).andReturn().getResponse();
 
-	City cityResult = jsonCityAttempt.parseObject(response.getContentAsString());
+	City cityResult = jsonCityAttempt.parseObject(response.getContentAsString()); 
 	
-	String test = response.getContentAsString();
-	System.out.println("RESPONSE" + response); 
-	
-	City expectedResult = new City(1, "MultiCity", "MultiCityDistrict1", 1000, country);
+	City expectedResult = new City(1, "MultiCity", "MultiCityDistrict1", 1000, country); //first result of list should be assigned to City object
 	expectedResult.setTimeAndTemp(new TimeAndTemp(32, 1000, -1000));
 	
 	assertThat(expectedResult).isEqualTo(cityResult); 
-			
 	}	
 }
