@@ -22,7 +22,8 @@ public class CityController {
 		
 		CityInfo cityInfo = cityService.getCityInfo(cityName);
 		
-		double tempFahrenheit = Math.round((cityInfo.timeAndTemp.temp - 273.15) * 9.0/5.0 + 32.0);
+		double tempFahrenheit = 
+			Math.round((cityInfo.timeAndTemp.temp - 273.15) * 9.0/5.0 + 32.0);
 		cityInfo.timeAndTemp.temp = tempFahrenheit;
 
 		//ThymeLeaf allows you to access object attributes, including using get 

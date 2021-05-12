@@ -29,15 +29,14 @@ public class CityRestController {
 		
 		//look up city info from the database. Multiple cities may have same name.
 		List<City> cities = cityRepository.findByName(name);
-		if ( cities.size() == 0) {
-			
+		
+		if ( cities.size() == 0) {		
 			//return 404 not found HTTP status code
 			return new ResponseEntity<City>(HttpStatus.NOT_FOUND);
 		} else {
-		//get first city in result array
 		City city = cities.get(0);
 		
-	//Call service WeatherService to retrieve time and temp data for city name
+	   //Call service WeatherService to retrieve time and temp data for city name
 	   TimeAndTemp timeAndTemp = weatherService.getTimeAndTemp(name); 
 	   
 		double tempFahrenheit = Math.round((timeAndTemp.temp - 273.15) * 9.0/5.0 + 32.0);
@@ -48,7 +47,7 @@ public class CityRestController {
 		
 		//return status 200(OK) code and city information in JSON format
 		return new ResponseEntity<City>(city, HttpStatus.OK);
+		}
 	}
-}
 
 }

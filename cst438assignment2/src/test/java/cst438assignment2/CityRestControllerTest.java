@@ -78,6 +78,7 @@ public class CityRestControllerTest {
 		City cityResult = jsonCityAttempt.parseObject(response.getContentAsString());
 	
    	City expectedResult = new City(1, "TestCity", "TestDistrict", 1000, country);
+   	
    	//expected weather is temp in Fahrenheit 
    	expectedResult.setTimeAndTemp(new TimeAndTemp(32, 1000, -1000));
 
