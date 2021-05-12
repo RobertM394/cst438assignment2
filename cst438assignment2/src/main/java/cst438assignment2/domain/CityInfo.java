@@ -1,9 +1,5 @@
 package cst438assignment2.domain;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
-
 public class CityInfo {
 
 	public City city;
